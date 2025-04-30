@@ -20,6 +20,24 @@ const usuariosController ={
                 error: error.message
             })
         }
+    },
+    async listarUsuarios( req, res){
+        try {
+             const [todosusuarios] = await connection.execute ('SELECT * FROM usuarios');
+
+            return res.status(201).json({
+                success: true,
+                count: todosusuarios.length,
+                data: todosusuarios
+            })
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Houve um erro ao encontrar usuarios",
+                error: error.message
+            })
+
+        }
     }
 }
 
